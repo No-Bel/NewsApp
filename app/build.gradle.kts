@@ -1,6 +1,7 @@
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id ("kotlin-kapt")
 }
 
 android {
@@ -45,4 +46,40 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Retrofit
+    //noinspection UseTomlInstead
+    implementation("com.squareup.retrofit2:retrofit:${rootProject.extra["retrofit_version"]}")
+    //noinspection UseTomlInstead
+    implementation("com.squareup.retrofit2:converter-gson:${rootProject.extra["retrofit_version"]}")
+    //noinspection UseTomlInstead
+    implementation("com.squareup.okhttp3:okhttp:${rootProject.extra["retrofit_okhttp3_version"]}")
+    //noinspection UseTomlInstead
+    implementation("com.squareup.okhttp3:logging-interceptor:${rootProject.extra["retrofit_okhttp3_version"]}")
+
+    // Coroutines
+    //noinspection UseTomlInstead
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${rootProject.extra["coroutines_version"]}")
+    //noinspection UseTomlInstead
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${rootProject.extra["coroutines_version"]}")
+    //noinspection UseTomlInstead
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${rootProject.extra["lifecycle_version"]}")
+    //noinspection UseTomlInstead
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:${rootProject.extra["lifecycle_version"]}")
+
+    // Room
+    implementation("androidx.room:room-runtime:${rootProject.extra["room_version"]}")
+    kapt("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
+    // Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:${rootProject.extra["room_version"]}")
+
+    // Navigation Component
+    implementation("androidx.navigation:navigation-fragment-ktx:${rootProject.extra["navigation_version"]}")
+    implementation("androidx.navigation:navigation-ui-ktx:${rootProject.extra["navigation_version"]}")
+
+    // Glide
+    implementation("com.github.bumptech.glide:glide:${rootProject.extra["glide_version"]}")
+    kapt("com.github.bumptech.glide:compiler:${rootProject.extra["glide_version"]}")
+
+
 }
