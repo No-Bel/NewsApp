@@ -18,6 +18,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -74,7 +78,9 @@ dependencies {
     implementation("androidx.room:room-ktx:${rootProject.extra["room_version"]}")
 
     // Navigation Component
+    //noinspection UseTomlInstead
     implementation("androidx.navigation:navigation-fragment-ktx:${rootProject.extra["navigation_version"]}")
+    //noinspection UseTomlInstead
     implementation("androidx.navigation:navigation-ui-ktx:${rootProject.extra["navigation_version"]}")
 
     // Glide
