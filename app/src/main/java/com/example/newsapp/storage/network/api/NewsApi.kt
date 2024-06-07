@@ -1,4 +1,4 @@
-package com.example.newsapp.network.api
+package com.example.newsapp.storage.network.api
 
 import com.example.newsapp.models.NewsResponse
 import com.example.newsapp.util.Constants.Companion.API_KEY

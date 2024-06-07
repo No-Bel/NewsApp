@@ -1,6 +1,6 @@
-package com.example.newsapp.network
+package com.example.newsapp.storage.network
 
-import com.example.newsapp.network.api.NewsApi
+import com.example.newsapp.storage.network.api.NewsApi
 import com.example.newsapp.util.Constants.Companion.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
