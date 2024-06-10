@@ -3,11 +3,14 @@ package com.example.newsapp.ui
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.newsapp.R
 import com.example.newsapp.databinding.ActivityMainBinding
+import com.example.newsapp.repository.NewsRepository
+import com.example.newsapp.storage.local.ArticleDatabase
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,12 +18,23 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     private lateinit var navHostFragment: NavHostFragment
+
+    lateinit var newsViewModel: NewsViewModel
+    private lateinit var newsViewModelProviderFactory: NewsViewModelProviderFactory
+    private lateinit var newsRepository: NewsRepository
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         navigation()
+        init()
+    }
+
+    private fun init() {
+        newsRepository = NewsRepository(ArticleDatabase(this))
+        newsViewModelProviderFactory = NewsViewModelProviderFactory(newsRepository)
+        newsViewModel = ViewModelProvider(this, newsViewModelProviderFactory)[NewsViewModel::class.java]
     }
 
     private fun navigation() {
