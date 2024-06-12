@@ -10,7 +10,7 @@ import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.newsapp.R
 import com.example.newsapp.databinding.ActivityMainBinding
 import com.example.newsapp.repository.NewsRepository
-//import com.example.newsapp.storage.local.ArticleDatabase
+import com.example.newsapp.storage.local.ArticleDatabase
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     private lateinit var navHostFragment: NavHostFragment
+    private lateinit var articleDatabase: ArticleDatabase
 
     lateinit var newsViewModel: NewsViewModel
     private lateinit var newsViewModelProviderFactory: NewsViewModelProviderFactory
@@ -32,7 +33,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        newsRepository = NewsRepository()
+        articleDatabase = ArticleDatabase(this)
+        newsRepository = NewsRepository(articleDatabase)
         newsViewModelProviderFactory = NewsViewModelProviderFactory(newsRepository)
         newsViewModel = ViewModelProvider(this, newsViewModelProviderFactory)[NewsViewModel::class.java]
     }
