@@ -2,13 +2,12 @@ package com.example.newsapp.ui.fragments
 
 import android.os.Bundle
 import android.util.Log.e
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentBreakingNewsBinding
 import com.example.newsapp.ui.MainActivity
 import com.example.newsapp.ui.NewsViewModel
@@ -22,7 +21,7 @@ class BreakingNewsFragment : Fragment() {
 
     private lateinit var newsViewModel: NewsViewModel
     private lateinit var newsAdapter: NewsAdapter
-    val TAG = "BreakingNewsFragment"
+    private val TAG = "BreakingNewsFragment"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,19 +39,21 @@ class BreakingNewsFragment : Fragment() {
 
     private fun observer() {
         newsViewModel.breakingNews.observe(viewLifecycleOwner) { response ->
-            when(response) {
+            when (response) {
                 is Resource.Success -> {
                     progressBarVisibility(false)
                     response.data?.let { newsResponse ->
                         newsAdapter.differ.submitList(newsResponse.articles)
                     }
                 }
+
                 is Resource.Error -> {
                     progressBarVisibility(false)
                     response.message?.let { message ->
                         e(TAG, "An error occured: $message")
                     }
                 }
+
                 is Resource.Loading -> progressBarVisibility(true)
             }
         }
