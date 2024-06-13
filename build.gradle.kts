@@ -11,6 +11,14 @@ buildscript {
         set("navigation_version", "2.7.7")
         set("glide_version", "4.12.0")
     }
+
+    dependencies {
+        //noinspection UseTomlInstead
+        classpath ("androidx.navigation:navigation-safe-args-gradle-plugin:2.7.7")
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
 }
 plugins {
     alias(libs.plugins.androidApplication) apply false
