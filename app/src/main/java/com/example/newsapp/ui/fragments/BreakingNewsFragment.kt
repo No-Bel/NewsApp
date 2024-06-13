@@ -45,6 +45,7 @@ class BreakingNewsFragment : Fragment() {
             val bundle = Bundle().apply {
                 putSerializable("article", it)
             }
+            e(TAG, "An error occured: $bundle")
             findNavController().navigate(
                 R.id.action_breakingNewsFragment_to_articleFragment,
                 bundle
