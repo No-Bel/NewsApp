@@ -9,8 +9,10 @@ import android.webkit.WebViewClient
 import androidx.navigation.fragment.navArgs
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentArticleBinding
+import com.example.newsapp.models.Article
 import com.example.newsapp.ui.MainActivity
 import com.example.newsapp.ui.NewsViewModel
+import com.google.android.material.snackbar.Snackbar
 
 class ArticleFragment : Fragment() {
 
@@ -18,6 +20,7 @@ class ArticleFragment : Fragment() {
     private val binding get() = _binding!!
 
     val args: ArticleFragmentArgs by navArgs()
+    private lateinit var article: Article
 
     private lateinit var newsViewModel: NewsViewModel
     override fun onCreateView(
@@ -31,10 +34,22 @@ class ArticleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         newsViewModel = (activity as MainActivity).newsViewModel
-        val article = args.article
+        article = args.article
+        setWebView()
+        setListeners()
+    }
+
+    private fun setWebView() {
         binding.webView.apply {
             webViewClient = WebViewClient()
             loadUrl(article.url)
+        }
+    }
+
+    private fun setListeners() {
+        binding.fab.setOnClickListener {
+            newsViewModel.saveArticle(article)
+            Snackbar.make(binding.root, "Article saved successfully", Snackbar.LENGTH_SHORT).show()
         }
     }
 
