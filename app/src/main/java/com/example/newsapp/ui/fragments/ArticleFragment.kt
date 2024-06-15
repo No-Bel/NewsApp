@@ -42,7 +42,7 @@ class ArticleFragment : Fragment() {
     private fun setWebView() {
         binding.webView.apply {
             webViewClient = WebViewClient()
-            loadUrl(article.url)
+            loadUrl(article.url!!)
         }
     }
 
