@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     private fun init() {
         articleDatabase = ArticleDatabase(this)
         newsRepository = NewsRepository(articleDatabase)
-        newsViewModelProviderFactory = NewsViewModelProviderFactory(newsRepository)
+        newsViewModelProviderFactory = NewsViewModelProviderFactory(application, newsRepository)
         newsViewModel = ViewModelProvider(this, newsViewModelProviderFactory)[NewsViewModel::class.java]
     }
 

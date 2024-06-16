@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -75,7 +76,7 @@ class BreakingNewsFragment : Fragment() {
                 is Resource.Error -> {
                     progressBarVisibility(false)
                     response.message?.let { message ->
-                        e(TAG, "An error occured: $message")
+                        Toast.makeText(activity, "An error occured: $message", Toast.LENGTH_SHORT).show()
                     }
                 }
 
